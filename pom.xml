@@ -15,6 +15,7 @@
 	<description>API do Sistema de Gestão de Ordens de Serviço</description>
 	<properties>
 		<java.version>25</java.version>
+		<openpdf.version>3.0.6</openpdf.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -36,6 +37,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.librepdf</groupId>
+			<artifactId>openpdf</artifactId>
+			<version>${openpdf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
