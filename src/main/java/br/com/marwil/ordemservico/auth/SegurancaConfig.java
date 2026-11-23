@@ -29,6 +29,7 @@ public class SegurancaConfig {
 				.authorizeHttpRequests(rotas -> rotas
 						.requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
 						.requestMatchers("/error").permitAll()
+						.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 						.anyRequest().authenticated())
 				.oauth2ResourceServer(servidor -> servidor
 						.jwt(jwt -> jwt.jwtAuthenticationConverter(conversor)));
