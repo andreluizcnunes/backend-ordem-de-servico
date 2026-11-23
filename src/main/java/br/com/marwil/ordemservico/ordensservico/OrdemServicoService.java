@@ -2,6 +2,7 @@ package br.com.marwil.ordemservico.ordensservico;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,6 +82,14 @@ public class OrdemServicoService {
 				.orElseThrow(AcessoOrdemServico::ordemNaoEncontrada)
 				.comEquipeERegistros(equipes.listar(id), registros.listar(id));
 		return usuario.ehGestor() ? detalhe : detalhe.semDadosFinanceiros();
+	}
+
+	@Transactional(readOnly = true)
+	public Optional<OrdemServicoDetalhe> detalharSeVisivel(UsuarioAutenticado usuario, long id) {
+		if (usuario.ehTecnico() && !ordens.visivelAoTecnico(id, usuario.id())) {
+			return Optional.empty();
+		}
+		return Optional.of(detalhar(usuario, id));
 	}
 
 	@Transactional(readOnly = true)

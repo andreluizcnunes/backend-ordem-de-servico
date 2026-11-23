@@ -33,6 +33,14 @@ public final class DadosOrdemServico {
 	public record Equipe(@NotNull List<@NotNull Long> tecnicosIds) {
 	}
 
+	public record Situacao(@NotNull StatusAtendimento status, @Size(max = 5000) String motivo) {
+	}
+
+	public record Registro(
+			@NotBlank @Size(max = 10000) String descricao,
+			@Size(max = 10000) String materiaisUtilizados) {
+	}
+
 	public record Atualizacao(
 			@NotBlank @Size(max = 10000) String descricao,
 			@NotBlank @Size(max = 300) String enderecoAtendimento,

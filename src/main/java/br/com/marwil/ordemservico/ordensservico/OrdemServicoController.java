@@ -1,10 +1,13 @@
 package br.com.marwil.ordemservico.ordensservico;
 
 import java.net.URI;
+import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,10 +31,36 @@ public class OrdemServicoController {
 
 	private final OrdemServicoService servico;
 	private final EquipeService equipes;
+	private final AtendimentoService atendimento;
 
-	public OrdemServicoController(OrdemServicoService servico, EquipeService equipes) {
+	public OrdemServicoController(OrdemServicoService servico, EquipeService equipes,
+			AtendimentoService atendimento) {
 		this.servico = servico;
 		this.equipes = equipes;
+		this.atendimento = atendimento;
+	}
+
+	@PatchMapping("/{id}/atendimento")
+	ResponseEntity<OrdemServicoDetalhe> alterarSituacao(@AuthenticationPrincipal UsuarioAutenticado usuario,
+			@PathVariable long id, @Valid @RequestBody DadosOrdemServico.Situacao dados) {
+		atendimento.alterarSituacao(usuario, id, dados.status(), dados.motivo());
+		return servico.detalharSeVisivel(usuario, id)
+				.map(ResponseEntity::ok)
+				.orElseGet(() -> ResponseEntity.noContent().build());
+	}
+
+	@GetMapping("/{id}/registros")
+	List<RegistroAtendimento> listarRegistros(@AuthenticationPrincipal UsuarioAutenticado usuario,
+			@PathVariable long id) {
+		return atendimento.listarRegistros(usuario, id);
+	}
+
+	@PostMapping("/{id}/registros")
+	ResponseEntity<RegistroAtendimento> registrar(@AuthenticationPrincipal UsuarioAutenticado usuario,
+			@PathVariable long id, @Valid @RequestBody DadosOrdemServico.Registro dados) {
+		RegistroAtendimento registro = atendimento.registrar(usuario, id, dados.descricao(),
+				dados.materiaisUtilizados());
+		return ResponseEntity.status(HttpStatus.CREATED).body(registro);
 	}
 
 	@PostMapping("/{id}/assumir")

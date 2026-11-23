@@ -98,28 +98,44 @@ public class OrdemServicoRepository {
 				.update();
 	}
 
-	public void atualizarAtendimento(long id, StatusAtendimento status, String motivoAguardando,
-			OffsetDateTime dataInicio, OffsetDateTime dataConclusao, Long concluidaPor) {
+	public void iniciarAtendimento(long id) {
 		jdbc.sql("""
 				UPDATE ordens_servico
-				SET status_atendimento = :status, motivo_aguardando = :motivo,
-				    data_inicio_atendimento = :dataInicio, data_conclusao = :dataConclusao,
-				    concluida_por = :concluidaPor
+				SET status_atendimento = 'EM_ATENDIMENTO', motivo_aguardando = NULL,
+				    data_inicio_atendimento = coalesce(data_inicio_atendimento, now()),
+				    data_conclusao = NULL, concluida_por = NULL
 				WHERE id = :id
 				""")
 				.param("id", id)
-				.param("status", status.name())
-				.param("motivo", motivoAguardando)
-				.param("dataInicio", dataInicio)
-				.param("dataConclusao", dataConclusao)
+				.update();
+	}
+
+	public void colocarEmEspera(long id, String motivo) {
+		jdbc.sql("""
+				UPDATE ordens_servico
+				SET status_atendimento = 'AGUARDANDO', motivo_aguardando = :motivo
+				WHERE id = :id
+				""")
+				.param("id", id)
+				.param("motivo", motivo)
+				.update();
+	}
+
+	public void concluir(long id, long concluidaPor) {
+		jdbc.sql("""
+				UPDATE ordens_servico
+				SET status_atendimento = 'CONCLUIDA', motivo_aguardando = NULL,
+				    data_conclusao = now(), concluida_por = :concluidaPor
+				WHERE id = :id
+				""")
+				.param("id", id)
 				.param("concluidaPor", concluidaPor)
 				.update();
 	}
 
 	public Optional<EstadoOrdemServico> bloquearParaAlteracao(long id) {
 		return jdbc.sql("""
-				SELECT os.id, os.status_atendimento, os.data_abertura, os.data_inicio_atendimento,
-				       coalesce(cb.status, 'NAO_ENVIADA') AS status_cobranca
+				SELECT os.id, os.status_atendimento, coalesce(cb.status, 'NAO_ENVIADA') AS status_cobranca
 				FROM ordens_servico os
 				LEFT JOIN cobrancas cb ON cb.ordem_servico_id = os.id
 				WHERE os.id = :id
@@ -129,8 +145,6 @@ public class OrdemServicoRepository {
 				.query((rs, linha) -> new EstadoOrdemServico(
 						rs.getLong("id"),
 						StatusAtendimento.valueOf(rs.getString("status_atendimento")),
-						rs.getObject("data_abertura", OffsetDateTime.class),
-						rs.getObject("data_inicio_atendimento", OffsetDateTime.class),
 						StatusCobranca.valueOf(rs.getString("status_cobranca"))))
 				.optional();
 	}
