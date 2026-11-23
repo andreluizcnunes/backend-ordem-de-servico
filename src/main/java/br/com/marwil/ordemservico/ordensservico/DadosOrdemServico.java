@@ -1,8 +1,12 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,6 +38,19 @@ public final class DadosOrdemServico {
 	}
 
 	public record Situacao(@NotNull StatusAtendimento status, @Size(max = 5000) String motivo) {
+	}
+
+	public record Itens(@NotNull List<@NotNull @Valid Item> itens) {
+	}
+
+	public record Item(
+			Long id,
+			@NotNull TipoItem tipo,
+			@NotBlank @Size(max = 500) String descricao,
+			@Size(max = 300) String localRealizacao,
+			@NotNull @DecimalMin(value = "0", inclusive = false) @Digits(integer = 9, fraction = 3) BigDecimal quantidade,
+			@NotNull(message = "informe o preço unitário; use 0 somente quando o item não for cobrado")
+			@DecimalMin("0") @Digits(integer = 10, fraction = 2) BigDecimal precoUnitario) {
 	}
 
 	public record Registro(

@@ -32,12 +32,27 @@ public class OrdemServicoController {
 	private final OrdemServicoService servico;
 	private final EquipeService equipes;
 	private final AtendimentoService atendimento;
+	private final PrecificacaoService precificacao;
 
 	public OrdemServicoController(OrdemServicoService servico, EquipeService equipes,
-			AtendimentoService atendimento) {
+			AtendimentoService atendimento, PrecificacaoService precificacao) {
 		this.servico = servico;
 		this.equipes = equipes;
 		this.atendimento = atendimento;
+		this.precificacao = precificacao;
+	}
+
+	@GetMapping("/{id}/itens")
+	@ApenasGestores
+	Precificacao consultarItens(@PathVariable long id) {
+		return precificacao.consultar(id);
+	}
+
+	@PutMapping("/{id}/itens")
+	@ApenasGestores
+	Precificacao definirItens(@AuthenticationPrincipal UsuarioAutenticado usuario, @PathVariable long id,
+			@Valid @RequestBody DadosOrdemServico.Itens dados) {
+		return precificacao.definirItens(usuario, id, dados.itens());
 	}
 
 	@PatchMapping("/{id}/atendimento")

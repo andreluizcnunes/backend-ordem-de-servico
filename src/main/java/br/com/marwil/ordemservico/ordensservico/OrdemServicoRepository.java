@@ -134,13 +134,20 @@ public class OrdemServicoRepository {
 	}
 
 	public Optional<EstadoOrdemServico> bloquearParaAlteracao(long id) {
+		return buscarEstado(id, " FOR UPDATE OF os");
+	}
+
+	public Optional<EstadoOrdemServico> buscarEstado(long id) {
+		return buscarEstado(id, "");
+	}
+
+	private Optional<EstadoOrdemServico> buscarEstado(long id, String bloqueio) {
 		return jdbc.sql("""
 				SELECT os.id, os.status_atendimento, coalesce(cb.status, 'NAO_ENVIADA') AS status_cobranca
 				FROM ordens_servico os
 				LEFT JOIN cobrancas cb ON cb.ordem_servico_id = os.id
 				WHERE os.id = :id
-				FOR UPDATE OF os
-				""")
+				""" + bloqueio)
 				.param("id", id)
 				.query((rs, linha) -> new EstadoOrdemServico(
 						rs.getLong("id"),
