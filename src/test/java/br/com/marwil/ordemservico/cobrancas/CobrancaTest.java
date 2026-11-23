@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.marwil.ordemservico.TesteIntegracao;
-import br.com.marwil.ordemservico.auth.Perfil;
+import br.com.marwil.ordemservico.enums.Perfil;
 import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
-import br.com.marwil.ordemservico.comum.ConflitoException;
+import br.com.marwil.ordemservico.exception.ConflitoException;
 
 class CobrancaTest extends TesteIntegracao {
 

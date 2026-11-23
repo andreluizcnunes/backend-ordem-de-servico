@@ -4,8 +4,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.marwil.ordemservico.comum.CredenciaisInvalidasException;
-import br.com.marwil.ordemservico.comum.RequisicaoInvalidaException;
+import br.com.marwil.ordemservico.exception.CredenciaisInvalidasException;
+import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
 
 @Service
 public class AutenticacaoService {

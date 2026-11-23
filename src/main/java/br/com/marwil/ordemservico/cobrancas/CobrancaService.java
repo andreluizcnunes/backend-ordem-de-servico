@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.cobrancas;
 
+import br.com.marwil.ordemservico.enums.StatusCobranca;
+
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.LocalDate;
@@ -9,17 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
 import br.com.marwil.ordemservico.cobrancas.CobrancaRepository.SituacaoCobranca;
-import br.com.marwil.ordemservico.comum.ConflitoException;
+import br.com.marwil.ordemservico.exception.ConflitoException;
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
-import br.com.marwil.ordemservico.comum.RecursoNaoEncontradoException;
-import br.com.marwil.ordemservico.comum.RequisicaoInvalidaException;
+import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
+import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
 import br.com.marwil.ordemservico.financeiro.LancamentoCaixaRepository;
 import br.com.marwil.ordemservico.ordensservico.AcessoOrdemServico;
 import br.com.marwil.ordemservico.ordensservico.EstadoOrdemServico;
 import br.com.marwil.ordemservico.ordensservico.ItemOrdemServicoRepository;
 import br.com.marwil.ordemservico.ordensservico.OrdemServicoRepository;
-import br.com.marwil.ordemservico.ordensservico.StatusAtendimento;
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
 
 @Service
 public class CobrancaService {

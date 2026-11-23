@@ -1,11 +1,13 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
+
 import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import br.com.marwil.ordemservico.cobrancas.StatusCobranca;
+import br.com.marwil.ordemservico.enums.StatusCobranca;
 import br.com.marwil.ordemservico.comum.UsuarioResumido;
 
 public record ResumoOrdemServico(

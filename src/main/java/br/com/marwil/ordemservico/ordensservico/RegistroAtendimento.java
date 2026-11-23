@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.TipoRegistro;
+
 import java.time.OffsetDateTime;
 
 import br.com.marwil.ordemservico.comum.UsuarioResumido;

@@ -1,4 +1,12 @@
-package br.com.marwil.ordemservico.comum;
+package br.com.marwil.ordemservico.exception;
+
+import br.com.marwil.ordemservico.exception.CredenciaisInvalidasException;
+
+import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
+
+import br.com.marwil.ordemservico.exception.ConflitoException;
+
+import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
 
 import java.util.List;
 import java.util.Map;

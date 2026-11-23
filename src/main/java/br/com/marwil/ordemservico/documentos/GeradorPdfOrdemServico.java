@@ -26,8 +26,8 @@ import br.com.marwil.ordemservico.ordensservico.ItemOrdemServico;
 import br.com.marwil.ordemservico.ordensservico.OrdemServicoDetalhe;
 import br.com.marwil.ordemservico.ordensservico.RegistroAtendimento;
 import br.com.marwil.ordemservico.ordensservico.TecnicoAtribuido;
-import br.com.marwil.ordemservico.ordensservico.TipoItem;
-import br.com.marwil.ordemservico.ordensservico.TipoRegistro;
+import br.com.marwil.ordemservico.enums.TipoItem;
+import br.com.marwil.ordemservico.enums.TipoRegistro;
 
 @Component
 public class GeradorPdfOrdemServico {

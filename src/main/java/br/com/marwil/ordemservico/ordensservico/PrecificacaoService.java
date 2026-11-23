@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -9,9 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
-import br.com.marwil.ordemservico.comum.ConflitoException;
-import br.com.marwil.ordemservico.comum.RequisicaoInvalidaException;
-import br.com.marwil.ordemservico.comum.Textos;
+import br.com.marwil.ordemservico.exception.ConflitoException;
+import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
+import br.com.marwil.ordemservico.util.Textos;
 import br.com.marwil.ordemservico.ordensservico.ItemOrdemServicoRepository.DadosItem;
 
 @Service

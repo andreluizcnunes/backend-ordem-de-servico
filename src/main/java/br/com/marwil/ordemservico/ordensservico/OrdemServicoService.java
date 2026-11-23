@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
 import br.com.marwil.ordemservico.clientes.Cliente;
 import br.com.marwil.ordemservico.clientes.ClienteRepository;
-import br.com.marwil.ordemservico.comum.ConflitoException;
+import br.com.marwil.ordemservico.exception.ConflitoException;
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
-import br.com.marwil.ordemservico.comum.RequisicaoInvalidaException;
-import br.com.marwil.ordemservico.comum.Textos;
+import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
+import br.com.marwil.ordemservico.util.Textos;
 import br.com.marwil.ordemservico.comum.UsuarioResumido;
 
 @Service

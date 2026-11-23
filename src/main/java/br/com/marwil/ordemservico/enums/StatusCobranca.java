@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.cobrancas;
+package br.com.marwil.ordemservico.enums;
 
 public enum StatusCobranca {
 

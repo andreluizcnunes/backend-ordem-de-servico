@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.ordensservico;
+package br.com.marwil.ordemservico.enums;
 
 public enum TipoRegistro {
 

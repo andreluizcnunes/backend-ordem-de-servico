@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
-import br.com.marwil.ordemservico.comum.RequisicaoInvalidaException;
+import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
 import br.com.marwil.ordemservico.financeiro.FinanceiroRepository.Totais;
 
 @Service

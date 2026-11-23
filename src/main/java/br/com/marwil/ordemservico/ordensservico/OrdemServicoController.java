@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
+
 import java.net.URI;
 import java.util.List;
 
@@ -19,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.marwil.ordemservico.auth.ApenasGestores;
 import br.com.marwil.ordemservico.auth.ApenasTecnicos;
 import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
-import br.com.marwil.ordemservico.cobrancas.StatusCobranca;
+import br.com.marwil.ordemservico.enums.StatusCobranca;
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
-import br.com.marwil.ordemservico.comum.Textos;
+import br.com.marwil.ordemservico.util.Textos;
 import jakarta.validation.Valid;
 
 @RestController

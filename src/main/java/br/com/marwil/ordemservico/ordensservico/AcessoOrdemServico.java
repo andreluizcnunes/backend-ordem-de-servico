@@ -4,7 +4,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 
 import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
-import br.com.marwil.ordemservico.comum.RecursoNaoEncontradoException;
+import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
 
 @Component
 public class AcessoOrdemServico {

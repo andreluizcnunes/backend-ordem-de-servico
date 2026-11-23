@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.comum;
+package br.com.marwil.ordemservico.util;
 
 public final class Textos {
 

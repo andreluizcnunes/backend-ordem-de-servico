@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.auth;
 
+import br.com.marwil.ordemservico.enums.Perfil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.auth;
 
+import br.com.marwil.ordemservico.enums.Perfil;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;

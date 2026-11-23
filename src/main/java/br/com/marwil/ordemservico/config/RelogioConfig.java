@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.comum;
+package br.com.marwil.ordemservico.config;
 
 import java.time.Clock;
 import java.time.ZoneId;

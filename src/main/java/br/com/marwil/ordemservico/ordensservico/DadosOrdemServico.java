@@ -1,5 +1,9 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.TipoItem;
+
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;

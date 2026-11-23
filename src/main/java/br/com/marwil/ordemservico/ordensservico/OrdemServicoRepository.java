@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
@@ -11,7 +13,7 @@ import java.util.Optional;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import br.com.marwil.ordemservico.cobrancas.StatusCobranca;
+import br.com.marwil.ordemservico.enums.StatusCobranca;
 import br.com.marwil.ordemservico.comum.Paginacao;
 import br.com.marwil.ordemservico.comum.UsuarioResumido;
 

@@ -1,6 +1,6 @@
 package br.com.marwil.ordemservico.clientes;
 
-import br.com.marwil.ordemservico.comum.Textos;
+import br.com.marwil.ordemservico.util.Textos;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.marwil.ordemservico.TesteIntegracao;
-import br.com.marwil.ordemservico.auth.Perfil;
+import br.com.marwil.ordemservico.enums.Perfil;
 
 class FinanceiroTest extends TesteIntegracao {
 

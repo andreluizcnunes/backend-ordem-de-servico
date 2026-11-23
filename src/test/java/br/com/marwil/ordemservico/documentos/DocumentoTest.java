@@ -16,7 +16,7 @@ import org.openpdf.text.pdf.parser.PdfTextExtractor;
 import org.springframework.http.MediaType;
 
 import br.com.marwil.ordemservico.TesteIntegracao;
-import br.com.marwil.ordemservico.auth.Perfil;
+import br.com.marwil.ordemservico.enums.Perfil;
 
 class DocumentoTest extends TesteIntegracao {
 

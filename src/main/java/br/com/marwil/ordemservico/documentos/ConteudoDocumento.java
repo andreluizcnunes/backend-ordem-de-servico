@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.marwil.ordemservico.ordensservico.ItemOrdemServico;
 import br.com.marwil.ordemservico.ordensservico.OrdemServicoDetalhe;
-import br.com.marwil.ordemservico.ordensservico.TipoItem;
+import br.com.marwil.ordemservico.enums.TipoItem;
 
 public record ConteudoDocumento(
 		String empresa,

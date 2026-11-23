@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.auth;
 
+import br.com.marwil.ordemservico.enums.Perfil;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;

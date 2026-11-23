@@ -1,5 +1,7 @@
 package br.com.marwil.ordemservico.cobrancas;
 
+import br.com.marwil.ordemservico.enums.StatusCobranca;
+
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;

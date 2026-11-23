@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
 import br.com.marwil.ordemservico.TesteIntegracao;
-import br.com.marwil.ordemservico.auth.Perfil;
+import br.com.marwil.ordemservico.enums.Perfil;
 
 class AtendimentoTest extends TesteIntegracao {
 

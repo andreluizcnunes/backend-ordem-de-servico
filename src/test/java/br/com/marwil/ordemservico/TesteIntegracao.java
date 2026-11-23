@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import com.jayway.jsonpath.JsonPath;
 
-import br.com.marwil.ordemservico.auth.Perfil;
+import br.com.marwil.ordemservico.enums.Perfil;
 
 @SpringBootTest
 @AutoConfigureMockMvc

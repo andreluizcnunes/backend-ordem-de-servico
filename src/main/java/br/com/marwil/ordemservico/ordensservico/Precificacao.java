@@ -1,9 +1,13 @@
 package br.com.marwil.ordemservico.ordensservico;
 
+import br.com.marwil.ordemservico.enums.TipoItem;
+
+import br.com.marwil.ordemservico.enums.StatusAtendimento;
+
 import java.math.BigDecimal;
 import java.util.List;
 
-import br.com.marwil.ordemservico.cobrancas.StatusCobranca;
+import br.com.marwil.ordemservico.enums.StatusCobranca;
 
 public record Precificacao(
 		long ordemServicoId,

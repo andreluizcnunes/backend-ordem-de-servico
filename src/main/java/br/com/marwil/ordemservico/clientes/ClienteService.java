@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
-import br.com.marwil.ordemservico.comum.RecursoNaoEncontradoException;
-import br.com.marwil.ordemservico.comum.Textos;
+import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
+import br.com.marwil.ordemservico.util.Textos;
 
 @Service
 public class ClienteService {
