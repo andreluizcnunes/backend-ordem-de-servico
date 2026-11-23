@@ -24,14 +24,17 @@ public class OrdemServicoService {
 	private final RegistroAtendimentoRepository registros;
 	private final ClienteRepository clientes;
 	private final AcessoOrdemServico acesso;
+	private final EquipeService equipeService;
 
 	public OrdemServicoService(OrdemServicoRepository ordens, EquipeRepository equipes,
-			RegistroAtendimentoRepository registros, ClienteRepository clientes, AcessoOrdemServico acesso) {
+			RegistroAtendimentoRepository registros, ClienteRepository clientes, AcessoOrdemServico acesso,
+			EquipeService equipeService) {
 		this.ordens = ordens;
 		this.equipes = equipes;
 		this.registros = registros;
 		this.clientes = clientes;
 		this.acesso = acesso;
+		this.equipeService = equipeService;
 	}
 
 	@Transactional
@@ -43,7 +46,7 @@ public class OrdemServicoService {
 			throw new RequisicaoInvalidaException(
 					"Informe o endereço de atendimento ou cadastre o endereço do cliente.");
 		}
-		return ordens.inserir(new OrdemServicoRepository.NovaOrdemServico(
+		long id = ordens.inserir(new OrdemServicoRepository.NovaOrdemServico(
 				cliente.id(),
 				dados.dataAbertura(),
 				Textos.obrigatorio(dados.descricao()),
@@ -52,6 +55,8 @@ public class OrdemServicoService {
 				Textos.primeiroPreenchido(dados.telefoneAtendimento(), cliente.telefone()),
 				Textos.primeiroPreenchido(dados.emailAtendimento(), cliente.email()),
 				responsavel.id()));
+		equipeService.atribuirNaAbertura(responsavel, id, dados.tecnicosOuVazio());
+		return id;
 	}
 
 	@Transactional

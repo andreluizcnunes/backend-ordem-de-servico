@@ -27,9 +27,26 @@ import jakarta.validation.Valid;
 public class OrdemServicoController {
 
 	private final OrdemServicoService servico;
+	private final EquipeService equipes;
 
-	public OrdemServicoController(OrdemServicoService servico) {
+	public OrdemServicoController(OrdemServicoService servico, EquipeService equipes) {
 		this.servico = servico;
+		this.equipes = equipes;
+	}
+
+	@PostMapping("/{id}/assumir")
+	@ApenasTecnicos
+	OrdemServicoDetalhe assumir(@AuthenticationPrincipal UsuarioAutenticado usuario, @PathVariable long id) {
+		equipes.assumir(usuario, id);
+		return servico.detalhar(usuario, id);
+	}
+
+	@PutMapping("/{id}/tecnicos")
+	@ApenasGestores
+	OrdemServicoDetalhe definirEquipe(@AuthenticationPrincipal UsuarioAutenticado usuario, @PathVariable long id,
+			@Valid @RequestBody DadosOrdemServico.Equipe dados) {
+		equipes.definirEquipe(usuario, id, dados.tecnicosIds());
+		return servico.detalhar(usuario, id);
 	}
 
 	@PostMapping

@@ -1,6 +1,7 @@
 package br.com.marwil.ordemservico.ordensservico;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -20,7 +21,16 @@ public final class DadosOrdemServico {
 			@Size(max = 300) String enderecoAtendimento,
 			@Size(max = 150) String contatoAtendimento,
 			@Size(max = 30) String telefoneAtendimento,
-			@Email @Size(max = 254) String emailAtendimento) {
+			@Email @Size(max = 254) String emailAtendimento,
+			List<@NotNull Long> tecnicosIds) {
+
+		public List<Long> tecnicosOuVazio() {
+			return tecnicosIds == null ? List.of() : tecnicosIds;
+		}
+
+	}
+
+	public record Equipe(@NotNull List<@NotNull Long> tecnicosIds) {
 	}
 
 	public record Atualizacao(
