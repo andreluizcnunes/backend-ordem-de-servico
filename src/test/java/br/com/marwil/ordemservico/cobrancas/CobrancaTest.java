@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.marwil.ordemservico.TesteIntegracao;
 import br.com.marwil.ordemservico.enums.Perfil;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import br.com.marwil.ordemservico.service.CobrancaService;
 import br.com.marwil.ordemservico.exception.ConflitoException;
 
 class CobrancaTest extends TesteIntegracao {
@@ -95,7 +96,7 @@ class CobrancaTest extends TesteIntegracao {
 				Callable<Boolean> tentativa = () -> {
 					largada.await();
 					try {
-						cobrancas.registrarPagamento(admin, cobrancaId, null, null);
+						cobrancas.registrarPagamento(admin, cobrancaId, null);
 						return true;
 					} catch (ConflitoException conflito) {
 						return false;
