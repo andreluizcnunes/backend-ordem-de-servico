@@ -36,9 +36,9 @@ public class AtendimentoService {
 	@Transactional
 	public void alterarSituacao(UsuarioAutenticado usuario, long ordemServicoId, StatusAtendimento novoStatus,
 			String motivo) {
-		acesso.garantirGestorOuIntegrante(usuario, ordemServicoId);
 		EstadoOrdemServico estado = ordens.bloquearParaAlteracao(ordemServicoId)
 				.orElseThrow(AcessoOrdemServico::ordemNaoEncontrada);
+		acesso.garantirGestorOuIntegrante(usuario, ordemServicoId);
 		garantirTransicaoPermitida(usuario, estado, novoStatus);
 		switch (novoStatus) {
 			case EM_ATENDIMENTO -> ordens.iniciarAtendimento(ordemServicoId);
@@ -51,8 +51,8 @@ public class AtendimentoService {
 	@Transactional
 	public RegistroAtendimento registrar(UsuarioAutenticado usuario, long ordemServicoId, String descricao,
 			String materiaisUtilizados) {
-		acesso.garantirGestorOuIntegrante(usuario, ordemServicoId);
 		ordens.bloquearParaAlteracao(ordemServicoId).orElseThrow(AcessoOrdemServico::ordemNaoEncontrada);
+		acesso.garantirGestorOuIntegrante(usuario, ordemServicoId);
 		return registros.inserir(ordemServicoId, usuario.id(), TipoRegistro.ATIVIDADE,
 				Textos.obrigatorio(descricao), Textos.opcional(materiaisUtilizados));
 	}
