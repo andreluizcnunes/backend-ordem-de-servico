@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
-import br.com.marwil.ordemservico.clientes.Cliente;
-import br.com.marwil.ordemservico.clientes.ClienteRepository;
+import br.com.marwil.ordemservico.entity.Cliente;
+import br.com.marwil.ordemservico.repository.ClienteRepository;
 import br.com.marwil.ordemservico.exception.ConflitoException;
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
@@ -42,21 +42,21 @@ public class OrdemServicoService {
 
 	@Transactional
 	public long abrir(UsuarioAutenticado responsavel, DadosOrdemServico.Abertura dados) {
-		Cliente cliente = clientes.buscarPorId(dados.clienteId())
+		Cliente cliente = clientes.findById(dados.clienteId())
 				.orElseThrow(() -> new RequisicaoInvalidaException("O cliente informado não existe."));
-		String endereco = Textos.primeiroPreenchido(dados.enderecoAtendimento(), cliente.endereco());
+		String endereco = Textos.primeiroPreenchido(dados.enderecoAtendimento(), cliente.getEndereco());
 		if (endereco == null) {
 			throw new RequisicaoInvalidaException(
 					"Informe o endereço de atendimento ou cadastre o endereço do cliente.");
 		}
 		long id = ordens.inserir(new OrdemServicoRepository.NovaOrdemServico(
-				cliente.id(),
+				cliente.getId(),
 				dados.dataAbertura(),
 				Textos.obrigatorio(dados.descricao()),
 				endereco,
-				Textos.primeiroPreenchido(dados.contatoAtendimento(), cliente.contato()),
-				Textos.primeiroPreenchido(dados.telefoneAtendimento(), cliente.telefone()),
-				Textos.primeiroPreenchido(dados.emailAtendimento(), cliente.email()),
+				Textos.primeiroPreenchido(dados.contatoAtendimento(), cliente.getContato()),
+				Textos.primeiroPreenchido(dados.telefoneAtendimento(), cliente.getTelefone()),
+				Textos.primeiroPreenchido(dados.emailAtendimento(), cliente.getEmail()),
 				responsavel.id()));
 		equipeService.atribuirNaAbertura(responsavel, id, dados.tecnicosOuVazio());
 		return id;

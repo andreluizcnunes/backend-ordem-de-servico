@@ -1,9 +1,9 @@
-package br.com.marwil.ordemservico.clientes;
+package br.com.marwil.ordemservico.dto.response;
 
 import java.time.OffsetDateTime;
 
-public record Cliente(
-		long id,
+public record ClienteResponse(
+		Long id,
 		String nome,
 		String contato,
 		String telefone,
