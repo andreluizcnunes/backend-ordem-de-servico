@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.documentos;
+package br.com.marwil.ordemservico.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

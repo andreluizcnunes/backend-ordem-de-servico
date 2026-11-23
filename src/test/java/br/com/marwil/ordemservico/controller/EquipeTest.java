@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.ordensservico;
+package br.com.marwil.ordemservico.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,9 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.marwil.ordemservico.TesteIntegracao;
 import br.com.marwil.ordemservico.enums.Perfil;
+import br.com.marwil.ordemservico.exception.ConflitoException;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.service.EquipeService;
-import br.com.marwil.ordemservico.exception.ConflitoException;
 
 class EquipeTest extends TesteIntegracao {
 

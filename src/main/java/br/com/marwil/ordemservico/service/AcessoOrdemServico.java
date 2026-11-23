@@ -1,15 +1,15 @@
 package br.com.marwil.ordemservico.service;
 
+import static br.com.marwil.ordemservico.repository.specification.OrdemServicoSpecifications.comId;
+import static br.com.marwil.ordemservico.repository.specification.OrdemServicoSpecifications.doTecnico;
+import static br.com.marwil.ordemservico.repository.specification.OrdemServicoSpecifications.visivelAoTecnico;
+
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 
 import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
 import br.com.marwil.ordemservico.repository.OrdemServicoRepository;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
-
-import static br.com.marwil.ordemservico.repository.specification.OrdemServicoSpecifications.comId;
-import static br.com.marwil.ordemservico.repository.specification.OrdemServicoSpecifications.doTecnico;
-import static br.com.marwil.ordemservico.repository.specification.OrdemServicoSpecifications.visivelAoTecnico;
 
 @Component
 public class AcessoOrdemServico {

@@ -1,6 +1,4 @@
-package br.com.marwil.ordemservico.auth;
-
-import br.com.marwil.ordemservico.enums.Perfil;
+package br.com.marwil.ordemservico.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -12,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.marwil.ordemservico.TesteIntegracao;
+import br.com.marwil.ordemservico.enums.Perfil;
 
 class UsuarioTest extends TesteIntegracao {
 

@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.ordensservico;
+package br.com.marwil.ordemservico.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
