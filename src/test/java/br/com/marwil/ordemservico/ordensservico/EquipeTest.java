@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.marwil.ordemservico.TesteIntegracao;
 import br.com.marwil.ordemservico.enums.Perfil;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import br.com.marwil.ordemservico.service.EquipeService;
 import br.com.marwil.ordemservico.exception.ConflitoException;
 
 class EquipeTest extends TesteIntegracao {

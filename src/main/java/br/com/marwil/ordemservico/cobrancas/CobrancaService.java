@@ -17,10 +17,10 @@ import br.com.marwil.ordemservico.comum.Paginacao;
 import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
 import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
 import br.com.marwil.ordemservico.financeiro.LancamentoCaixaRepository;
-import br.com.marwil.ordemservico.ordensservico.AcessoOrdemServico;
-import br.com.marwil.ordemservico.ordensservico.EstadoOrdemServico;
-import br.com.marwil.ordemservico.ordensservico.ItemOrdemServicoRepository;
-import br.com.marwil.ordemservico.ordensservico.OrdemServicoRepository;
+import br.com.marwil.ordemservico.entity.OrdemServico;
+import br.com.marwil.ordemservico.repository.ItemOrdemServicoRepository;
+import br.com.marwil.ordemservico.repository.OrdemServicoRepository;
+import br.com.marwil.ordemservico.service.AcessoOrdemServico;
 import br.com.marwil.ordemservico.enums.StatusAtendimento;
 
 @Service
@@ -46,18 +46,18 @@ public class CobrancaService {
 
 	@Transactional
 	public Cobranca enviar(UsuarioAutenticado responsavel, long ordemServicoId, LocalDate dataVencimento) {
-		EstadoOrdemServico estado = ordens.bloquearParaAlteracao(ordemServicoId)
+		OrdemServico ordem = ordens.findComBloqueioById(ordemServicoId)
 				.orElseThrow(AcessoOrdemServico::ordemNaoEncontrada);
-		if (estado.statusAtendimento() != StatusAtendimento.CONCLUIDA) {
+		if (ordem.getStatusAtendimento() != StatusAtendimento.CONCLUIDA) {
 			throw new ConflitoException("Somente ordens de serviço concluídas podem ser enviadas à cobrança.");
 		}
-		if (estado.cobrancaEnviada()) {
+		if (ordens.findStatusCobranca(ordemServicoId).isPresent()) {
 			throw new ConflitoException("A ordem de serviço já foi enviada à cobrança.");
 		}
-		if (itens.idsDaOrdem(ordemServicoId).isEmpty()) {
+		if (!itens.existsByOrdemServicoId(ordemServicoId)) {
 			throw new ConflitoException("Precifique a ordem de serviço antes de enviá-la à cobrança.");
 		}
-		BigDecimal total = itens.somarTotal(ordemServicoId);
+		BigDecimal total = itens.somarValorTotal(ordemServicoId);
 		if (total.signum() <= 0) {
 			throw new ConflitoException("O valor total da ordem de serviço precisa ser maior que zero para cobrança.");
 		}

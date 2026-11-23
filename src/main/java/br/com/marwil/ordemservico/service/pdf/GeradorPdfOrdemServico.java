@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.documentos;
+package br.com.marwil.ordemservico.service.pdf;
 
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
@@ -22,10 +22,10 @@ import org.openpdf.text.pdf.PdfPageEventHelper;
 import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.stereotype.Component;
 
-import br.com.marwil.ordemservico.ordensservico.ItemOrdemServico;
-import br.com.marwil.ordemservico.ordensservico.OrdemServicoDetalhe;
-import br.com.marwil.ordemservico.ordensservico.RegistroAtendimento;
-import br.com.marwil.ordemservico.ordensservico.TecnicoAtribuido;
+import br.com.marwil.ordemservico.dto.response.ItemOrdemServicoResponse;
+import br.com.marwil.ordemservico.dto.response.OrdemServicoResponse;
+import br.com.marwil.ordemservico.dto.response.RegistroAtendimentoResponse;
+import br.com.marwil.ordemservico.dto.response.TecnicoAtribuidoResponse;
 import br.com.marwil.ordemservico.enums.TipoItem;
 import br.com.marwil.ordemservico.enums.TipoRegistro;
 
@@ -83,7 +83,7 @@ public class GeradorPdfOrdemServico {
 		return tabela;
 	}
 
-	private PdfPTable dadosCliente(OrdemServicoDetalhe ordem) {
+	private PdfPTable dadosCliente(OrdemServicoResponse ordem) {
 		PdfPTable tabela = tabela(new float[] { 1, 3, 1, 2 });
 		titulo(tabela, "Cliente");
 		campo(tabela, "Cliente", ordem.cliente().nome(), 3);
@@ -113,8 +113,8 @@ public class GeradorPdfOrdemServico {
 		cabecalhoColunas(tabela, valores ? List.of("Qtd.", "Descrição", "Valor unit.", "Valor")
 				: List.of("Qtd.", "Descrição"));
 		tabela.setHeaderRows(2);
-		List<ItemOrdemServico> produtos = conteudo.produtos();
-		for (ItemOrdemServico item : produtos) {
+		List<ItemOrdemServicoResponse> produtos = conteudo.produtos();
+		for (ItemOrdemServicoResponse item : produtos) {
 			tabela.addCell(celula(Formatacao.quantidade(item.quantidade()), Element.ALIGN_CENTER));
 			tabela.addCell(celula(item.descricao(), Element.ALIGN_LEFT));
 			if (valores) {
@@ -134,8 +134,8 @@ public class GeradorPdfOrdemServico {
 		cabecalhoColunas(tabela, valores ? List.of("Qtd.", "Descrição", "Região / local", "Valor")
 				: List.of("Qtd.", "Descrição", "Região / local"));
 		tabela.setHeaderRows(2);
-		List<ItemOrdemServico> servicos = conteudo.servicos();
-		for (ItemOrdemServico item : servicos) {
+		List<ItemOrdemServicoResponse> servicos = conteudo.servicos();
+		for (ItemOrdemServicoResponse item : servicos) {
 			String descricao = item.tipo() == TipoItem.MAO_DE_OBRA ? "Mão de obra: " + item.descricao()
 					: item.descricao();
 			tabela.addCell(celula(Formatacao.quantidade(item.quantidade()), Element.ALIGN_CENTER));
@@ -154,7 +154,7 @@ public class GeradorPdfOrdemServico {
 		boolean exibirTotal = conteudo.exibirValores() && conteudo.total() != null;
 		PdfPTable tabela = tabela(exibirTotal ? new float[] { 3, 1 } : new float[] { 1 });
 		String tecnicos = conteudo.ordem().tecnicos().stream()
-				.map(TecnicoAtribuido::nome)
+				.map(TecnicoAtribuidoResponse::nome)
 				.collect(Collectors.joining(", "));
 		PdfPCell celulaTecnicos = new PdfPCell();
 		celulaTecnicos.addElement(new Phrase("Técnico(s): ", ROTULO));
@@ -172,12 +172,12 @@ public class GeradorPdfOrdemServico {
 		return tabela;
 	}
 
-	private PdfPTable registros(List<RegistroAtendimento> registros) {
+	private PdfPTable registros(List<RegistroAtendimentoResponse> registros) {
 		PdfPTable tabela = tabela(new float[] { 2, 2, 6 });
 		titulo(tabela, "Registros do atendimento");
 		cabecalhoColunas(tabela, List.of("Data", "Autor", "Descrição / materiais"));
 		tabela.setHeaderRows(2);
-		for (RegistroAtendimento registro : registros) {
+		for (RegistroAtendimentoResponse registro : registros) {
 			String texto = registro.descricao();
 			if (registro.materiaisUtilizados() != null) {
 				texto += "\nMateriais: " + registro.materiaisUtilizados();
@@ -211,7 +211,7 @@ public class GeradorPdfOrdemServico {
 		return celula;
 	}
 
-	private static String rotuloSituacao(OrdemServicoDetalhe ordem) {
+	private static String rotuloSituacao(OrdemServicoResponse ordem) {
 		return switch (ordem.statusAtendimento()) {
 			case ABERTA -> "Aberta";
 			case EM_ATENDIMENTO -> "Em atendimento";

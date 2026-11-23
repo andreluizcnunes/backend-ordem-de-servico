@@ -1,12 +1,12 @@
-package br.com.marwil.ordemservico.ordensservico;
-
-import br.com.marwil.ordemservico.enums.TipoItem;
+package br.com.marwil.ordemservico.dto.response;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-public record ItemOrdemServico(
-		long id,
+import br.com.marwil.ordemservico.enums.TipoItem;
+
+public record ItemOrdemServicoResponse(
+		Long id,
 		TipoItem tipo,
 		String descricao,
 		String localRealizacao,

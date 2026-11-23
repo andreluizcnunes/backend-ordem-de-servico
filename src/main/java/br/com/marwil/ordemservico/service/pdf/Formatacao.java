@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.documentos;
+package br.com.marwil.ordemservico.service.pdf;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
