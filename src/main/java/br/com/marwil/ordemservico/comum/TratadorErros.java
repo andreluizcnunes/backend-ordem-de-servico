@@ -35,6 +35,11 @@ public class TratadorErros extends ResponseEntityExceptionHandler {
 		return problema(HttpStatus.BAD_REQUEST, "Requisição inválida", excecao.getMessage());
 	}
 
+	@ExceptionHandler(CredenciaisInvalidasException.class)
+	ProblemDetail tratarCredenciaisInvalidas(CredenciaisInvalidasException excecao) {
+		return problema(HttpStatus.UNAUTHORIZED, "Não autenticado", excecao.getMessage());
+	}
+
 	@ExceptionHandler(AccessDeniedException.class)
 	ProblemDetail tratarAcessoNegado(AccessDeniedException excecao) {
 		return problema(HttpStatus.FORBIDDEN, "Acesso negado", "O perfil do usuário não permite esta operação.");
