@@ -40,6 +40,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(rotas -> rotas
 						.requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
 						.requestMatchers(ROTAS_PUBLICAS_DOCUMENTACAO).permitAll()
+						.requestMatchers(HttpMethod.GET, "/actuator/health", "/actuator/health/**").permitAll()
 						.requestMatchers("/error").permitAll()
 						.anyRequest().authenticated())
 				.oauth2ResourceServer(servidor -> servidor
