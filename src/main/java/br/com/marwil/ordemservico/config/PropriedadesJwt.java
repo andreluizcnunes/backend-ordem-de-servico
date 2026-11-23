@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.auth;
+package br.com.marwil.ordemservico.config;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;

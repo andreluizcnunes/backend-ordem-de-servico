@@ -12,7 +12,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
+import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.exception.ConflitoException;
 import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
 import br.com.marwil.ordemservico.util.Textos;

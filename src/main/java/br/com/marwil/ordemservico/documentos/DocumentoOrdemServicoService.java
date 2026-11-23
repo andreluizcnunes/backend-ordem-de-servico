@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
+import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.ordensservico.OrdemServicoDetalhe;
 import br.com.marwil.ordemservico.ordensservico.OrdemServicoService;
 import br.com.marwil.ordemservico.ordensservico.Precificacao;

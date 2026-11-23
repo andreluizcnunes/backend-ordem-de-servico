@@ -1,11 +1,11 @@
-package br.com.marwil.ordemservico.auth;
-
-import br.com.marwil.ordemservico.enums.Perfil;
+package br.com.marwil.ordemservico.dto.response;
 
 import java.time.OffsetDateTime;
 
-public record Usuario(
-		long id,
+import br.com.marwil.ordemservico.enums.Perfil;
+
+public record UsuarioResponse(
+		Long id,
 		String nome,
 		String email,
 		Perfil perfil,

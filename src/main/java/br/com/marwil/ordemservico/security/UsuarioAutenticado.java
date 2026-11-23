@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.auth;
+package br.com.marwil.ordemservico.security;
 
 import br.com.marwil.ordemservico.enums.Perfil;
 

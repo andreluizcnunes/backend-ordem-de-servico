@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.marwil.ordemservico.auth.ApenasGestores;
+import br.com.marwil.ordemservico.security.ApenasGestores;
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
 

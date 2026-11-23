@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
+import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.clientes.Cliente;
 import br.com.marwil.ordemservico.clientes.ClienteRepository;
 import br.com.marwil.ordemservico.exception.ConflitoException;

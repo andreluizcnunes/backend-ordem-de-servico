@@ -1,6 +1,4 @@
-package br.com.marwil.ordemservico.auth;
-
-import br.com.marwil.ordemservico.enums.Perfil;
+package br.com.marwil.ordemservico.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import br.com.marwil.ordemservico.entity.Usuario;
+import br.com.marwil.ordemservico.enums.Perfil;
+import br.com.marwil.ordemservico.repository.UsuarioRepository;
 
 @Component
 public class DonoInicialInicializador implements ApplicationRunner {
@@ -37,11 +39,16 @@ public class DonoInicialInicializador implements ApplicationRunner {
 	@Override
 	@Transactional
 	public void run(ApplicationArguments argumentos) {
-		if (!configuracaoCompleta() || usuarios.existeAlgumUsuario()) {
+		if (!configuracaoCompleta() || usuarios.count() > 0) {
 			return;
 		}
-		usuarios.inserir(nome.strip(), email.strip(), codificador.encode(senha), Perfil.DONO);
-		LOG.info("Usuário dono inicial criado para {}", email.strip());
+		Usuario dono = new Usuario();
+		dono.setNome(nome.strip());
+		dono.setEmail(email.strip());
+		dono.setSenhaHash(codificador.encode(senha));
+		dono.setPerfil(Perfil.DONO);
+		usuarios.save(dono);
+		LOG.info("Usuário dono inicial criado para {}", dono.getEmail());
 	}
 
 	private boolean configuracaoCompleta() {

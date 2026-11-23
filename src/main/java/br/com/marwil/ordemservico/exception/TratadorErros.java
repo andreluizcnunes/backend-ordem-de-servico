@@ -1,13 +1,5 @@
 package br.com.marwil.ordemservico.exception;
 
-import br.com.marwil.ordemservico.exception.CredenciaisInvalidasException;
-
-import br.com.marwil.ordemservico.exception.RequisicaoInvalidaException;
-
-import br.com.marwil.ordemservico.exception.ConflitoException;
-
-import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
-
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +10,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -43,9 +36,9 @@ public class TratadorErros extends ResponseEntityExceptionHandler {
 		return problema(HttpStatus.BAD_REQUEST, "Requisição inválida", excecao.getMessage());
 	}
 
-	@ExceptionHandler(CredenciaisInvalidasException.class)
-	ProblemDetail tratarCredenciaisInvalidas(CredenciaisInvalidasException excecao) {
-		return problema(HttpStatus.UNAUTHORIZED, "Não autenticado", excecao.getMessage());
+	@ExceptionHandler(AuthenticationException.class)
+	ProblemDetail tratarFalhaAutenticacao(AuthenticationException excecao) {
+		return problema(HttpStatus.UNAUTHORIZED, "Não autenticado", "E-mail ou senha inválidos.");
 	}
 
 	@ExceptionHandler(AccessDeniedException.class)

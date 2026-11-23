@@ -3,7 +3,7 @@ package br.com.marwil.ordemservico.ordensservico;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 
-import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
+import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
 
 @Component

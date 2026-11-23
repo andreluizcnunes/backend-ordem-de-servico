@@ -1,4 +1,4 @@
-package br.com.marwil.ordemservico.auth;
+package br.com.marwil.ordemservico.security;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasRole('TECNICO')")
-public @interface ApenasTecnicos {
+@PreAuthorize("hasAnyRole('DONO', 'ADMINISTRATIVO')")
+public @interface ApenasGestores {
 }

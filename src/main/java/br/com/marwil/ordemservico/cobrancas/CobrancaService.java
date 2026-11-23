@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
+import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.cobrancas.CobrancaRepository.SituacaoCobranca;
 import br.com.marwil.ordemservico.exception.ConflitoException;
 import br.com.marwil.ordemservico.comum.Pagina;

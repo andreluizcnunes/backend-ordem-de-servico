@@ -14,7 +14,7 @@ public final class Textos {
 	}
 
 	public static String obrigatorio(String valor) {
-		return valor.strip();
+		return valor == null ? null : valor.strip();
 	}
 
 	public static String primeiroPreenchido(String preferencial, String alternativo) {

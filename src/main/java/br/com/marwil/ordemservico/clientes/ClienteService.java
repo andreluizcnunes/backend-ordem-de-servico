@@ -3,7 +3,7 @@ package br.com.marwil.ordemservico.clientes;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.marwil.ordemservico.auth.UsuarioAutenticado;
+import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.comum.Pagina;
 import br.com.marwil.ordemservico.comum.Paginacao;
 import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;

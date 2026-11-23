@@ -1,10 +1,14 @@
-package br.com.marwil.ordemservico.auth;
+package br.com.marwil.ordemservico.security;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.marwil.ordemservico.entity.Usuario;
+import br.com.marwil.ordemservico.repository.UsuarioRepository;
 
 @Component
 public class ConversorAutenticacaoJwt implements Converter<Jwt, AbstractAuthenticationToken> {
@@ -16,12 +20,13 @@ public class ConversorAutenticacaoJwt implements Converter<Jwt, AbstractAuthenti
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public AbstractAuthenticationToken convert(Jwt token) {
-		long id = lerIdentificador(token);
-		CredencialUsuario credencial = usuarios.buscarCredencialPorId(id)
-				.filter(CredencialUsuario::ativo)
+		Usuario usuario = usuarios.findById(lerIdentificador(token))
+				.filter(Usuario::isAtivo)
 				.orElseThrow(() -> new BadCredentialsException("Usuário inexistente ou inativo."));
-		return new AutenticacaoUsuario(credencial.comoAutenticado(), token);
+		return new AutenticacaoUsuario(new UsuarioAutenticado(usuario.getId(), usuario.getNome(), usuario.getPerfil()),
+				token);
 	}
 
 	private static long lerIdentificador(Jwt token) {
