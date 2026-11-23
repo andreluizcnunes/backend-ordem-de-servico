@@ -65,6 +65,55 @@ public abstract class TesteIntegracao {
 				.single();
 	}
 
+	protected long criarCliente(String nome, String endereco, long criadoPor) {
+		return jdbc.sql("""
+				INSERT INTO clientes (nome, contato, telefone, endereco, criado_por)
+				VALUES (:nome, 'Contato do cliente', '(11) 3333-4444', :endereco, :criadoPor)
+				RETURNING id
+				""")
+				.param("nome", nome)
+				.param("endereco", endereco)
+				.param("criadoPor", criadoPor)
+				.query(Long.class)
+				.single();
+	}
+
+	protected long criarOrdem(long clienteId, String descricao, long criadoPor) {
+		return jdbc.sql("""
+				INSERT INTO ordens_servico (cliente_id, descricao, endereco_atendimento, criado_por)
+				VALUES (:clienteId, :descricao, 'Rua do Atendimento, 10', :criadoPor)
+				RETURNING id
+				""")
+				.param("clienteId", clienteId)
+				.param("descricao", descricao)
+				.param("criadoPor", criadoPor)
+				.query(Long.class)
+				.single();
+	}
+
+	protected void atribuir(long ordemId, long tecnicoId, long atribuidoPor) {
+		jdbc.sql("""
+				INSERT INTO ordens_servico_tecnicos (ordem_servico_id, tecnico_id, atribuido_por)
+				VALUES (:ordemId, :tecnicoId, :atribuidoPor)
+				""")
+				.param("ordemId", ordemId)
+				.param("tecnicoId", tecnicoId)
+				.param("atribuidoPor", atribuidoPor)
+				.update();
+	}
+
+	protected void marcarConcluida(long ordemId, long concluidaPor) {
+		jdbc.sql("""
+				UPDATE ordens_servico
+				SET status_atendimento = 'CONCLUIDA', data_inicio_atendimento = now(), data_conclusao = now(),
+				    concluida_por = :concluidaPor
+				WHERE id = :id
+				""")
+				.param("id", ordemId)
+				.param("concluidaPor", concluidaPor)
+				.update();
+	}
+
 	protected String token(String email) throws Exception {
 		String corpo = mvc.perform(post("/api/v1/auth/login")
 				.contentType(MediaType.APPLICATION_JSON)
