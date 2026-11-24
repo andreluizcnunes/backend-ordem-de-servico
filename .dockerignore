@@ -2,4 +2,5 @@
 !pom.xml
 !mvnw
 !.mvn/wrapper/maven-wrapper.properties
+!.mvn/jvm.config
 !src/main/**
