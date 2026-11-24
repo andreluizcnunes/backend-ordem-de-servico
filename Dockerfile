@@ -1,7 +1,7 @@
 FROM eclipse-temurin:25-jdk AS construcao
 WORKDIR /construcao
 COPY .mvn .mvn
-COPY mvnw pom.xml ./
+COPY mvnw pom.xml lombok.config ./
 RUN --mount=type=cache,target=/root/.m2 ./mvnw -B -q dependency:go-offline
 COPY src/main src/main
 RUN --mount=type=cache,target=/root/.m2 ./mvnw -B -q -Dmaven.test.skip=true package \

@@ -1,5 +1,6 @@
 *
 !pom.xml
+!lombok.config
 !mvnw
 !.mvn/wrapper/maven-wrapper.properties
 !.mvn/jvm.config
