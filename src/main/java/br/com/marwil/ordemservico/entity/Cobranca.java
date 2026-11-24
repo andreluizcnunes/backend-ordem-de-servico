@@ -21,9 +21,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "cobrancas")
+@Getter
+@Setter
 public class Cobranca {
 
 	@Id
@@ -34,6 +39,7 @@ public class Cobranca {
 	@JoinColumn(name = "ordem_servico_id", nullable = false, updatable = false)
 	private OrdemServico ordemServico;
 
+	@Setter(AccessLevel.NONE)
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ordem_servico_status", nullable = false, updatable = false, length = 20)
 	private StatusAtendimento ordemServicoStatus = StatusAtendimento.CONCLUIDA;
@@ -55,6 +61,7 @@ public class Cobranca {
 	@Column(name = "enviada_em", nullable = false, updatable = false)
 	private OffsetDateTime enviadaEm;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = { EventType.INSERT, EventType.UPDATE })
 	@Column(name = "atualizado_em", insertable = false, updatable = false)
 	private OffsetDateTime atualizadoEm;
@@ -64,78 +71,6 @@ public class Cobranca {
 
 	public boolean estaVencida(LocalDate hoje) {
 		return status == StatusCobranca.PENDENTE && dataVencimento != null && dataVencimento.isBefore(hoje);
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public OrdemServico getOrdemServico() {
-		return ordemServico;
-	}
-
-	public void setOrdemServico(OrdemServico ordemServico) {
-		this.ordemServico = ordemServico;
-	}
-
-	public StatusAtendimento getOrdemServicoStatus() {
-		return ordemServicoStatus;
-	}
-
-	public BigDecimal getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
-	public StatusCobranca getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusCobranca status) {
-		this.status = status;
-	}
-
-	public LocalDate getDataVencimento() {
-		return dataVencimento;
-	}
-
-	public void setDataVencimento(LocalDate dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
-
-	public Usuario getEnviadaPor() {
-		return enviadaPor;
-	}
-
-	public void setEnviadaPor(Usuario enviadaPor) {
-		this.enviadaPor = enviadaPor;
-	}
-
-	public OffsetDateTime getEnviadaEm() {
-		return enviadaEm;
-	}
-
-	public void setEnviadaEm(OffsetDateTime enviadaEm) {
-		this.enviadaEm = enviadaEm;
-	}
-
-	public OffsetDateTime getAtualizadoEm() {
-		return atualizadoEm;
-	}
-
-	public Pagamento getPagamento() {
-		return pagamento;
-	}
-
-	public void setPagamento(Pagamento pagamento) {
-		this.pagamento = pagamento;
 	}
 
 }

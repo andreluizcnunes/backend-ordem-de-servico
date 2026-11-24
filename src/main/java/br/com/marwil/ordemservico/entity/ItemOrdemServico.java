@@ -18,9 +18,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "itens_ordem_servico")
+@Getter
+@Setter
 public class ItemOrdemServico {
 
 	@Id
@@ -47,6 +52,7 @@ public class ItemOrdemServico {
 	@Column(name = "preco_unitario", nullable = false, precision = 12, scale = 2)
 	private BigDecimal precoUnitario;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = { EventType.INSERT, EventType.UPDATE })
 	@Column(name = "valor_total", insertable = false, updatable = false, precision = 14, scale = 2)
 	private BigDecimal valorTotal;
@@ -55,88 +61,14 @@ public class ItemOrdemServico {
 	@JoinColumn(name = "criado_por", nullable = false, updatable = false)
 	private Usuario criadoPor;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = EventType.INSERT)
 	@Column(name = "criado_em", insertable = false, updatable = false)
 	private OffsetDateTime criadoEm;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = { EventType.INSERT, EventType.UPDATE })
 	@Column(name = "atualizado_em", insertable = false, updatable = false)
 	private OffsetDateTime atualizadoEm;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public OrdemServico getOrdemServico() {
-		return ordemServico;
-	}
-
-	public void setOrdemServico(OrdemServico ordemServico) {
-		this.ordemServico = ordemServico;
-	}
-
-	public TipoItem getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoItem tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getLocalRealizacao() {
-		return localRealizacao;
-	}
-
-	public void setLocalRealizacao(String localRealizacao) {
-		this.localRealizacao = localRealizacao;
-	}
-
-	public BigDecimal getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(BigDecimal quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public BigDecimal getPrecoUnitario() {
-		return precoUnitario;
-	}
-
-	public void setPrecoUnitario(BigDecimal precoUnitario) {
-		this.precoUnitario = precoUnitario;
-	}
-
-	public BigDecimal getValorTotal() {
-		return valorTotal;
-	}
-
-	public Usuario getCriadoPor() {
-		return criadoPor;
-	}
-
-	public void setCriadoPor(Usuario criadoPor) {
-		this.criadoPor = criadoPor;
-	}
-
-	public OffsetDateTime getCriadoEm() {
-		return criadoEm;
-	}
-
-	public OffsetDateTime getAtualizadoEm() {
-		return atualizadoEm;
-	}
 
 }

@@ -13,9 +13,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "ordens_servico_tecnicos")
+@Getter
+@NoArgsConstructor
 public class OrdemServicoTecnico {
 
 	@EmbeddedId
@@ -42,9 +46,6 @@ public class OrdemServicoTecnico {
 	@Column(name = "atribuido_em", nullable = false, updatable = false)
 	private OffsetDateTime atribuidoEm;
 
-	public OrdemServicoTecnico() {
-	}
-
 	public OrdemServicoTecnico(OrdemServico ordemServico, Usuario tecnico, Usuario atribuidoPor,
 			OffsetDateTime atribuidoEm) {
 		this.id = new OrdemServicoTecnicoId(ordemServico.getId(), tecnico.getId());
@@ -52,30 +53,6 @@ public class OrdemServicoTecnico {
 		this.tecnico = tecnico;
 		this.atribuidoPor = atribuidoPor;
 		this.atribuidoEm = atribuidoEm;
-	}
-
-	public OrdemServicoTecnicoId getId() {
-		return id;
-	}
-
-	public OrdemServico getOrdemServico() {
-		return ordemServico;
-	}
-
-	public Usuario getTecnico() {
-		return tecnico;
-	}
-
-	public Perfil getTecnicoPerfil() {
-		return tecnicoPerfil;
-	}
-
-	public Usuario getAtribuidoPor() {
-		return atribuidoPor;
-	}
-
-	public OffsetDateTime getAtribuidoEm() {
-		return atribuidoEm;
 	}
 
 }

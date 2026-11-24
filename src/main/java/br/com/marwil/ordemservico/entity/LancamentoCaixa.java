@@ -16,9 +16,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "lancamentos_caixa")
+@Getter
+@Setter
 public class LancamentoCaixa {
 
 	@Id
@@ -35,44 +40,9 @@ public class LancamentoCaixa {
 	@Column(name = "data_lancamento", nullable = false, updatable = false)
 	private LocalDate dataLancamento;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = EventType.INSERT)
 	@Column(name = "criado_em", insertable = false, updatable = false)
 	private OffsetDateTime criadoEm;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Pagamento getPagamento() {
-		return pagamento;
-	}
-
-	public void setPagamento(Pagamento pagamento) {
-		this.pagamento = pagamento;
-	}
-
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
-
-	public LocalDate getDataLancamento() {
-		return dataLancamento;
-	}
-
-	public void setDataLancamento(LocalDate dataLancamento) {
-		this.dataLancamento = dataLancamento;
-	}
-
-	public OffsetDateTime getCriadoEm() {
-		return criadoEm;
-	}
 
 }

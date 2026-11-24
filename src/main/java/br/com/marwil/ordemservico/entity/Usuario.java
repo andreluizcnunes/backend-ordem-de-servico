@@ -14,9 +14,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "usuarios")
+@Getter
+@Setter
 public class Usuario {
 
 	@Id
@@ -39,68 +44,14 @@ public class Usuario {
 	@Column(nullable = false)
 	private boolean ativo = true;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = EventType.INSERT)
 	@Column(name = "criado_em", insertable = false, updatable = false)
 	private OffsetDateTime criadoEm;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = { EventType.INSERT, EventType.UPDATE })
 	@Column(name = "atualizado_em", insertable = false, updatable = false)
 	private OffsetDateTime atualizadoEm;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenhaHash() {
-		return senhaHash;
-	}
-
-	public void setSenhaHash(String senhaHash) {
-		this.senhaHash = senhaHash;
-	}
-
-	public Perfil getPerfil() {
-		return perfil;
-	}
-
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public OffsetDateTime getCriadoEm() {
-		return criadoEm;
-	}
-
-	public OffsetDateTime getAtualizadoEm() {
-		return atualizadoEm;
-	}
 
 }

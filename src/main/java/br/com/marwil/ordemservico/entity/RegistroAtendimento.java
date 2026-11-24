@@ -14,9 +14,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "registros_atendimento")
+@Getter
+@Setter
 public class RegistroAtendimento {
 
 	@Id
@@ -43,61 +47,5 @@ public class RegistroAtendimento {
 
 	@Column(name = "registrado_em", nullable = false, updatable = false)
 	private OffsetDateTime registradoEm;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public OrdemServico getOrdemServico() {
-		return ordemServico;
-	}
-
-	public void setOrdemServico(OrdemServico ordemServico) {
-		this.ordemServico = ordemServico;
-	}
-
-	public Usuario getAutor() {
-		return autor;
-	}
-
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
-	}
-
-	public TipoRegistro getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoRegistro tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getMateriaisUtilizados() {
-		return materiaisUtilizados;
-	}
-
-	public void setMateriaisUtilizados(String materiaisUtilizados) {
-		this.materiaisUtilizados = materiaisUtilizados;
-	}
-
-	public OffsetDateTime getRegistradoEm() {
-		return registradoEm;
-	}
-
-	public void setRegistradoEm(OffsetDateTime registradoEm) {
-		this.registradoEm = registradoEm;
-	}
 
 }

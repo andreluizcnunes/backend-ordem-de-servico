@@ -17,9 +17,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "pagamentos")
+@Getter
+@Setter
 public class Pagamento {
 
 	@Id
@@ -30,6 +35,7 @@ public class Pagamento {
 	@JoinColumn(name = "cobranca_id", nullable = false, updatable = false)
 	private Cobranca cobranca;
 
+	@Setter(AccessLevel.NONE)
 	@Enumerated(EnumType.STRING)
 	@Column(name = "cobranca_status", nullable = false, updatable = false, length = 20)
 	private StatusCobranca cobrancaStatus = StatusCobranca.PAGA;
@@ -46,57 +52,5 @@ public class Pagamento {
 
 	@Column(name = "registrado_em", nullable = false, updatable = false)
 	private OffsetDateTime registradoEm;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Cobranca getCobranca() {
-		return cobranca;
-	}
-
-	public void setCobranca(Cobranca cobranca) {
-		this.cobranca = cobranca;
-	}
-
-	public StatusCobranca getCobrancaStatus() {
-		return cobrancaStatus;
-	}
-
-	public BigDecimal getValorRecebido() {
-		return valorRecebido;
-	}
-
-	public void setValorRecebido(BigDecimal valorRecebido) {
-		this.valorRecebido = valorRecebido;
-	}
-
-	public LocalDate getDataPagamento() {
-		return dataPagamento;
-	}
-
-	public void setDataPagamento(LocalDate dataPagamento) {
-		this.dataPagamento = dataPagamento;
-	}
-
-	public Usuario getRegistradoPor() {
-		return registradoPor;
-	}
-
-	public void setRegistradoPor(Usuario registradoPor) {
-		this.registradoPor = registradoPor;
-	}
-
-	public OffsetDateTime getRegistradoEm() {
-		return registradoEm;
-	}
-
-	public void setRegistradoEm(OffsetDateTime registradoEm) {
-		this.registradoEm = registradoEm;
-	}
 
 }

@@ -22,9 +22,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ordens_servico")
+@Getter
+@Setter
 public class OrdemServico {
 
 	@Id
@@ -74,156 +79,29 @@ public class OrdemServico {
 	@JoinColumn(name = "criado_por", nullable = false, updatable = false)
 	private Usuario criadoPor;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = EventType.INSERT)
 	@Column(name = "criado_em", insertable = false, updatable = false)
 	private OffsetDateTime criadoEm;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = { EventType.INSERT, EventType.UPDATE })
 	@Column(name = "atualizado_em", insertable = false, updatable = false)
 	private OffsetDateTime atualizadoEm;
 
+	@Setter(AccessLevel.NONE)
 	@OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("atribuidoEm ASC")
 	private List<OrdemServicoTecnico> tecnicos = new ArrayList<>();
 
+	@Setter(AccessLevel.NONE)
 	@OneToMany(mappedBy = "ordemServico")
 	@OrderBy("registradoEm ASC, id ASC")
 	private List<RegistroAtendimento> registros = new ArrayList<>();
 
+	@Setter(AccessLevel.NONE)
 	@OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id ASC")
 	private List<ItemOrdemServico> itens = new ArrayList<>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public OffsetDateTime getDataAbertura() {
-		return dataAbertura;
-	}
-
-	public void setDataAbertura(OffsetDateTime dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getEnderecoAtendimento() {
-		return enderecoAtendimento;
-	}
-
-	public void setEnderecoAtendimento(String enderecoAtendimento) {
-		this.enderecoAtendimento = enderecoAtendimento;
-	}
-
-	public String getContatoAtendimento() {
-		return contatoAtendimento;
-	}
-
-	public void setContatoAtendimento(String contatoAtendimento) {
-		this.contatoAtendimento = contatoAtendimento;
-	}
-
-	public String getTelefoneAtendimento() {
-		return telefoneAtendimento;
-	}
-
-	public void setTelefoneAtendimento(String telefoneAtendimento) {
-		this.telefoneAtendimento = telefoneAtendimento;
-	}
-
-	public String getEmailAtendimento() {
-		return emailAtendimento;
-	}
-
-	public void setEmailAtendimento(String emailAtendimento) {
-		this.emailAtendimento = emailAtendimento;
-	}
-
-	public StatusAtendimento getStatusAtendimento() {
-		return statusAtendimento;
-	}
-
-	public void setStatusAtendimento(StatusAtendimento statusAtendimento) {
-		this.statusAtendimento = statusAtendimento;
-	}
-
-	public String getMotivoAguardando() {
-		return motivoAguardando;
-	}
-
-	public void setMotivoAguardando(String motivoAguardando) {
-		this.motivoAguardando = motivoAguardando;
-	}
-
-	public OffsetDateTime getDataInicioAtendimento() {
-		return dataInicioAtendimento;
-	}
-
-	public void setDataInicioAtendimento(OffsetDateTime dataInicioAtendimento) {
-		this.dataInicioAtendimento = dataInicioAtendimento;
-	}
-
-	public OffsetDateTime getDataConclusao() {
-		return dataConclusao;
-	}
-
-	public void setDataConclusao(OffsetDateTime dataConclusao) {
-		this.dataConclusao = dataConclusao;
-	}
-
-	public Usuario getConcluidaPor() {
-		return concluidaPor;
-	}
-
-	public void setConcluidaPor(Usuario concluidaPor) {
-		this.concluidaPor = concluidaPor;
-	}
-
-	public Usuario getCriadoPor() {
-		return criadoPor;
-	}
-
-	public void setCriadoPor(Usuario criadoPor) {
-		this.criadoPor = criadoPor;
-	}
-
-	public OffsetDateTime getCriadoEm() {
-		return criadoEm;
-	}
-
-	public OffsetDateTime getAtualizadoEm() {
-		return atualizadoEm;
-	}
-
-	public List<OrdemServicoTecnico> getTecnicos() {
-		return tecnicos;
-	}
-
-	public List<RegistroAtendimento> getRegistros() {
-		return registros;
-	}
-
-	public List<ItemOrdemServico> getItens() {
-		return itens;
-	}
 
 }

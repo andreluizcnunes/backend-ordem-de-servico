@@ -14,9 +14,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "clientes")
+@Getter
+@Setter
 public class Cliente {
 
 	@Id
@@ -42,76 +47,14 @@ public class Cliente {
 	@JoinColumn(name = "criado_por", nullable = false, updatable = false)
 	private Usuario criadoPor;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = EventType.INSERT)
 	@Column(name = "criado_em", insertable = false, updatable = false)
 	private OffsetDateTime criadoEm;
 
+	@Setter(AccessLevel.NONE)
 	@Generated(event = { EventType.INSERT, EventType.UPDATE })
 	@Column(name = "atualizado_em", insertable = false, updatable = false)
 	private OffsetDateTime atualizadoEm;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getContato() {
-		return contato;
-	}
-
-	public void setContato(String contato) {
-		this.contato = contato;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public Usuario getCriadoPor() {
-		return criadoPor;
-	}
-
-	public void setCriadoPor(Usuario criadoPor) {
-		this.criadoPor = criadoPor;
-	}
-
-	public OffsetDateTime getCriadoEm() {
-		return criadoEm;
-	}
-
-	public OffsetDateTime getAtualizadoEm() {
-		return atualizadoEm;
-	}
 
 }
