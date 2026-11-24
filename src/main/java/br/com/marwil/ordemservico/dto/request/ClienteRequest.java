@@ -6,11 +6,22 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record ClienteRequest(
-		@NotBlank @Size(max = 200) String nome,
-		@Size(max = 150) String contato,
-		@Size(max = 30) String telefone,
-		@Email @Size(max = 254) String email,
-		@Size(max = 300) String endereco) {
+		@NotBlank(message = "Informe o nome do cliente.")
+		@Size(max = 200, message = "O nome do cliente deve ter no máximo {max} caracteres.")
+		String nome,
+
+		@Size(max = 150, message = "O contato deve ter no máximo {max} caracteres.")
+		String contato,
+
+		@Size(max = 30, message = "O telefone deve ter no máximo {max} caracteres.")
+		String telefone,
+
+		@Email(message = "Informe um e-mail válido.")
+		@Size(max = 254, message = "O e-mail deve ter no máximo {max} caracteres.")
+		String email,
+
+		@Size(max = 300, message = "O endereço deve ter no máximo {max} caracteres.")
+		String endereco) {
 
 	public ClienteRequest {
 		nome = Textos.obrigatorio(nome);

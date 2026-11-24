@@ -8,10 +8,21 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record UsuarioRequest(
-		@NotBlank @Size(max = 150) String nome,
-		@NotBlank @Email @Size(max = 254) String email,
-		@NotBlank @Size(min = 8, max = 72) String senha,
-		@NotNull Perfil perfil) {
+		@NotBlank(message = "Informe o nome do usuário.")
+		@Size(max = 150, message = "O nome do usuário deve ter no máximo {max} caracteres.")
+		String nome,
+
+		@NotBlank(message = "Informe o e-mail.")
+		@Email(message = "Informe um e-mail válido.")
+		@Size(max = 254, message = "O e-mail deve ter no máximo {max} caracteres.")
+		String email,
+
+		@NotBlank(message = "Informe a senha.")
+		@Size(min = 8, max = 72, message = "A senha deve ter entre {min} e {max} caracteres.")
+		String senha,
+
+		@NotNull(message = "Informe o perfil: DONO, ADMINISTRATIVO ou TECNICO.")
+		Perfil perfil) {
 
 	public UsuarioRequest {
 		nome = Textos.obrigatorio(nome);
