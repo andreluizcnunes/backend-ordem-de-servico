@@ -1,11 +1,11 @@
 # 001 — Stack, arquitetura em camadas, persistência e autenticação
 
 **Data:** 23/11/2026
-**Situação:** adotada; revisada no mesmo dia para Spring Data JPA, camadas, MapStruct e Swagger
+**Situação:** adotada; revisada no mesmo dia para Spring Data JPA, camadas, MapStruct e Swagger, e em 24/11/2026 para Lombok
 
 ## Contexto
 
-O levantamento indicava Java + Spring Boot + PostgreSQL como referência. O responsável pelo projeto definiu como padrão Spring Data JPA, organização em camadas (entidade, DTO, mapper MapStruct, repository, service e controller), Spring Security e documentação Swagger. O esquema do banco é mantido no repositório `banco-dados-ordem-de-servico` e já define as regras de integridade críticas: chaves compostas que impedem cobrança de OS não concluída, pagamento de cobrança não paga e lançamento com valor diferente do pagamento, além de unicidade de cobrança por OS, de pagamento por cobrança e de lançamento por pagamento.
+O levantamento indicava Java + Spring Boot + PostgreSQL como referência. O responsável pelo projeto definiu como padrão Spring Data JPA, organização em camadas (entidade, DTO, mapper MapStruct, repository, service e controller), Spring Security, documentação Swagger e Lombok para reduzir código repetitivo. O esquema do banco é mantido no repositório `banco-dados-ordem-de-servico` e já define as regras de integridade críticas: chaves compostas que impedem cobrança de OS não concluída, pagamento de cobrança não paga e lançamento com valor diferente do pagamento, além de unicidade de cobrança por OS, de pagamento por cobrança e de lançamento por pagamento.
 
 ## Decisão
 
@@ -21,6 +21,14 @@ O levantamento indicava Java + Spring Boot + PostgreSQL como referência. O resp
   - `security`: `UserDetailsService`, emissão de JWT, conversão do token em usuário autenticado e anotações de perfil.
   - `config`: Spring Security, JWT, OpenAPI, relógio e criação do dono inicial.
   - `exception`: exceções de negócio e tratamento global em `ProblemDetail`.
+- **Lombok** (versão gerenciada pelo Spring Boot, só em tempo de compilação, fora do jar final):
+  - Entidades usam `@Getter` e `@Setter`; colunas preenchidas pelo banco, colunas fixas e coleções recebem `@Setter(AccessLevel.NONE)` para continuarem somente leitura.
+  - Entidades não usam `@Data`, `@EqualsAndHashCode` nem `@ToString`, que percorreriam relacionamentos preguiçosos e quebrariam a identidade gerenciada pelo Hibernate. A exceção é a chave composta `OrdemServicoTecnicoId`, cuja igualdade por valor é exigida pelo JPA.
+  - Componentes Spring recebem dependências por `@RequiredArgsConstructor`; `lombok.config` copia `@Value` dos campos para o construtor gerado. Construtores com lógica permanecem escritos à mão.
+  - Logs usam `@Slf4j`.
+  - DTOs continuam como `record`, que já dispensam Lombok.
+  - O processador do Lombok roda antes do MapStruct pelo `lombok-mapstruct-binding`.
+  - `.mvn/jvm.config` libera o acesso a `sun.misc.Unsafe` usado pelo Lombok no JDK 25, evitando avisos no build.
 - **Mapeamento fiel ao esquema:**
   - `ddl-auto=none` em execução e `validate` nos testes, que conferem cada entidade contra o script real.
   - Colunas preenchidas pelo banco (`valor_total` gerado, `criado_em` e `atualizado_em` por default e trigger) são somente leitura e relidas após gravar (`@Generated`).
