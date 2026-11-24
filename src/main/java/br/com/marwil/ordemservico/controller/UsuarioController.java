@@ -28,19 +28,17 @@ import br.com.marwil.ordemservico.util.Paginacao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
 @Tag(name = "Usuários")
+@RequiredArgsConstructor
 public class UsuarioController {
 
 	private static final Sort ORDENACAO = Sort.by(Sort.Order.asc("nome").ignoreCase(), Sort.Order.asc("id"));
 
 	private final UsuarioService servico;
-
-	public UsuarioController(UsuarioService servico) {
-		this.servico = servico;
-	}
 
 	@GetMapping
 	@ApenasGestores

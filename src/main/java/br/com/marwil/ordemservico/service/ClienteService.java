@@ -15,19 +15,15 @@ import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.repository.specification.ClienteSpecifications;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.util.Textos;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ClienteService {
 
 	private final ClienteRepository clientes;
 	private final UsuarioRepository usuarios;
 	private final ClienteMapper mapper;
-
-	public ClienteService(ClienteRepository clientes, UsuarioRepository usuarios, ClienteMapper mapper) {
-		this.clientes = clientes;
-		this.usuarios = usuarios;
-		this.mapper = mapper;
-	}
 
 	@Transactional
 	public ClienteResponse cadastrar(UsuarioAutenticado responsavel, ClienteRequest requisicao) {

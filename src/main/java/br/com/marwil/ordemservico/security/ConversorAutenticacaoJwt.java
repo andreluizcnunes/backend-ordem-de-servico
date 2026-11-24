@@ -9,15 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.marwil.ordemservico.entity.Usuario;
 import br.com.marwil.ordemservico.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class ConversorAutenticacaoJwt implements Converter<Jwt, AbstractAuthenticationToken> {
 
 	private final UsuarioRepository usuarios;
-
-	public ConversorAutenticacaoJwt(UsuarioRepository usuarios) {
-		this.usuarios = usuarios;
-	}
 
 	@Override
 	@Transactional(readOnly = true)

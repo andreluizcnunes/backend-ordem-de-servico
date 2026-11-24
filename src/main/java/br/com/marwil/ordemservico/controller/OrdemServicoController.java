@@ -41,10 +41,12 @@ import br.com.marwil.ordemservico.util.Paginacao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/ordens-servico")
 @Tag(name = "Ordens de serviço")
+@RequiredArgsConstructor
 public class OrdemServicoController {
 
 	private static final Sort ORDENACAO = Sort.by(Sort.Order.desc("dataAbertura"), Sort.Order.desc("id"));
@@ -53,14 +55,6 @@ public class OrdemServicoController {
 	private final EquipeService equipes;
 	private final AtendimentoService atendimento;
 	private final PrecificacaoService precificacao;
-
-	public OrdemServicoController(OrdemServicoService ordens, EquipeService equipes, AtendimentoService atendimento,
-			PrecificacaoService precificacao) {
-		this.ordens = ordens;
-		this.equipes = equipes;
-		this.atendimento = atendimento;
-		this.precificacao = precificacao;
-	}
 
 	@PostMapping
 	@ApenasGestores

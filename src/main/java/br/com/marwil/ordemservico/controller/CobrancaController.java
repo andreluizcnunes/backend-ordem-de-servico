@@ -26,11 +26,13 @@ import br.com.marwil.ordemservico.util.Paginacao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1")
 @ApenasGestores
 @Tag(name = "Cobranças")
+@RequiredArgsConstructor
 public class CobrancaController {
 
 	private static final Sort ORDENACAO = Sort.by(
@@ -40,10 +42,6 @@ public class CobrancaController {
 			Sort.Order.desc("id"));
 
 	private final CobrancaService servico;
-
-	public CobrancaController(CobrancaService servico) {
-		this.servico = servico;
-	}
 
 	@PostMapping("/ordens-servico/{id}/enviar-cobranca")
 	@Operation(summary = "Envia a ordem concluída e precificada à cobrança como pendente")

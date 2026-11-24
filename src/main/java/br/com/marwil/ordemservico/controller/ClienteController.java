@@ -24,20 +24,18 @@ import br.com.marwil.ordemservico.util.Paginacao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/clientes")
 @ApenasGestores
 @Tag(name = "Clientes")
+@RequiredArgsConstructor
 public class ClienteController {
 
 	private static final Sort ORDENACAO = Sort.by(Sort.Order.asc("nome").ignoreCase(), Sort.Order.asc("id"));
 
 	private final ClienteService servico;
-
-	public ClienteController(ClienteService servico) {
-		this.servico = servico;
-	}
 
 	@GetMapping
 	@Operation(summary = "Lista clientes, com busca por nome, contato, telefone ou e-mail")

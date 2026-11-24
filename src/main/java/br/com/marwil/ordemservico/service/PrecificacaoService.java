@@ -28,8 +28,10 @@ import br.com.marwil.ordemservico.mapper.ItemOrdemServicoMapper;
 import br.com.marwil.ordemservico.repository.OrdemServicoRepository;
 import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class PrecificacaoService {
 
 	private static final BigDecimal ZERO = new BigDecimal("0.00");
@@ -37,13 +39,6 @@ public class PrecificacaoService {
 	private final OrdemServicoRepository ordens;
 	private final UsuarioRepository usuarios;
 	private final ItemOrdemServicoMapper mapper;
-
-	public PrecificacaoService(OrdemServicoRepository ordens, UsuarioRepository usuarios,
-			ItemOrdemServicoMapper mapper) {
-		this.ordens = ordens;
-		this.usuarios = usuarios;
-		this.mapper = mapper;
-	}
 
 	@Transactional(readOnly = true)
 	public PrecificacaoResponse consultar(Long ordemServicoId) {

@@ -40,8 +40,10 @@ import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.repository.projection.StatusCobrancaDaOrdem;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.util.Textos;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class OrdemServicoService {
 
 	private final OrdemServicoRepository ordens;
@@ -51,17 +53,6 @@ public class OrdemServicoService {
 	private final AcessoOrdemServico acesso;
 	private final OrdemServicoMapper mapper;
 	private final Clock relogio;
-
-	public OrdemServicoService(OrdemServicoRepository ordens, ClienteRepository clientes, UsuarioRepository usuarios,
-			EquipeService equipes, AcessoOrdemServico acesso, OrdemServicoMapper mapper, Clock relogio) {
-		this.ordens = ordens;
-		this.clientes = clientes;
-		this.usuarios = usuarios;
-		this.equipes = equipes;
-		this.acesso = acesso;
-		this.mapper = mapper;
-		this.relogio = relogio;
-	}
 
 	@Transactional
 	public Long abrir(UsuarioAutenticado responsavel, OrdemServicoRequest requisicao) {

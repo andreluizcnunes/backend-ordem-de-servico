@@ -11,22 +11,18 @@ import br.com.marwil.ordemservico.dto.response.PrecificacaoResponse;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.service.pdf.ConteudoDocumento;
 import br.com.marwil.ordemservico.service.pdf.GeradorPdfOrdemServico;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class DocumentoOrdemServicoService {
 
 	private final OrdemServicoService ordens;
 	private final PrecificacaoService precificacao;
 	private final GeradorPdfOrdemServico gerador;
-	private final String empresa;
 
-	public DocumentoOrdemServicoService(OrdemServicoService ordens, PrecificacaoService precificacao,
-			GeradorPdfOrdemServico gerador, @Value("${app.empresa.nome}") String empresa) {
-		this.ordens = ordens;
-		this.precificacao = precificacao;
-		this.gerador = gerador;
-		this.empresa = empresa;
-	}
+	@Value("${app.empresa.nome}")
+	private final String empresa;
 
 	@Transactional(readOnly = true)
 	public byte[] gerarPdf(UsuarioAutenticado usuario, Long ordemServicoId) {

@@ -24,8 +24,10 @@ import br.com.marwil.ordemservico.repository.OrdemServicoRepository;
 import br.com.marwil.ordemservico.repository.RegistroAtendimentoRepository;
 import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AtendimentoService {
 
 	private static final Map<StatusAtendimento, Set<StatusAtendimento>> TRANSICOES = Map.of(
@@ -40,16 +42,6 @@ public class AtendimentoService {
 	private final AcessoOrdemServico acesso;
 	private final RegistroAtendimentoMapper mapper;
 	private final Clock relogio;
-
-	public AtendimentoService(OrdemServicoRepository ordens, RegistroAtendimentoRepository registros,
-			UsuarioRepository usuarios, AcessoOrdemServico acesso, RegistroAtendimentoMapper mapper, Clock relogio) {
-		this.ordens = ordens;
-		this.registros = registros;
-		this.usuarios = usuarios;
-		this.acesso = acesso;
-		this.mapper = mapper;
-		this.relogio = relogio;
-	}
 
 	@Transactional
 	public void alterarSituacao(UsuarioAutenticado usuario, Long ordemServicoId, SituacaoAtendimentoRequest requisicao) {

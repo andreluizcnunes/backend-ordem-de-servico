@@ -26,8 +26,10 @@ import br.com.marwil.ordemservico.repository.LancamentoCaixaRepository;
 import br.com.marwil.ordemservico.repository.projection.PendenciaPorCliente;
 import br.com.marwil.ordemservico.repository.projection.RecebimentoPorCliente;
 import br.com.marwil.ordemservico.repository.projection.Totalizador;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class FinanceiroService {
 
 	private static final LocalDate INICIO_ABERTO = LocalDate.of(1900, 1, 1);
@@ -38,14 +40,6 @@ public class FinanceiroService {
 	private final CobrancaRepository cobrancas;
 	private final LancamentoCaixaMapper mapper;
 	private final Clock relogio;
-
-	public FinanceiroService(LancamentoCaixaRepository caixa, CobrancaRepository cobrancas,
-			LancamentoCaixaMapper mapper, Clock relogio) {
-		this.caixa = caixa;
-		this.cobrancas = cobrancas;
-		this.mapper = mapper;
-		this.relogio = relogio;
-	}
 
 	@Transactional(readOnly = true)
 	public ResumoFinanceiroResponse resumir(LocalDate inicio, LocalDate fim) {

@@ -19,8 +19,10 @@ import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.security.TokenService;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.security.UsuarioDetails;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AutenticacaoService {
 
 	private static final String TIPO_TOKEN = "Bearer";
@@ -30,15 +32,6 @@ public class AutenticacaoService {
 	private final UsuarioRepository usuarios;
 	private final PasswordEncoder codificador;
 	private final UsuarioMapper mapper;
-
-	public AutenticacaoService(AuthenticationManager gerenciadorAutenticacao, TokenService tokens,
-			UsuarioRepository usuarios, PasswordEncoder codificador, UsuarioMapper mapper) {
-		this.gerenciadorAutenticacao = gerenciadorAutenticacao;
-		this.tokens = tokens;
-		this.usuarios = usuarios;
-		this.codificador = codificador;
-		this.mapper = mapper;
-	}
 
 	public LoginResponse autenticar(LoginRequest requisicao) {
 		Authentication autenticacao = gerenciadorAutenticacao.authenticate(

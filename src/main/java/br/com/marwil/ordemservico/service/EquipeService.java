@@ -25,22 +25,16 @@ import br.com.marwil.ordemservico.repository.OrdemServicoRepository;
 import br.com.marwil.ordemservico.repository.OrdemServicoTecnicoRepository;
 import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class EquipeService {
 
 	private final OrdemServicoRepository ordens;
 	private final OrdemServicoTecnicoRepository atribuicoes;
 	private final UsuarioRepository usuarios;
 	private final Clock relogio;
-
-	public EquipeService(OrdemServicoRepository ordens, OrdemServicoTecnicoRepository atribuicoes,
-			UsuarioRepository usuarios, Clock relogio) {
-		this.ordens = ordens;
-		this.atribuicoes = atribuicoes;
-		this.usuarios = usuarios;
-		this.relogio = relogio;
-	}
 
 	@Transactional
 	public void assumir(UsuarioAutenticado tecnico, Long ordemServicoId) {

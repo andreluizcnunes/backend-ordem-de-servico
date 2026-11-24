@@ -19,17 +19,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @Tag(name = "Autenticação")
+@RequiredArgsConstructor
 public class AutenticacaoController {
 
 	private final AutenticacaoService servico;
-
-	public AutenticacaoController(AutenticacaoService servico) {
-		this.servico = servico;
-	}
 
 	@PostMapping("/login")
 	@SecurityRequirements

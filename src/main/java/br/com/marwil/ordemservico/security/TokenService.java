@@ -11,8 +11,10 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import br.com.marwil.ordemservico.config.PropriedadesJwt;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class TokenService {
 
 	private static final String EMISSOR = "backend-ordem-de-servico";
@@ -20,12 +22,6 @@ public class TokenService {
 	private final JwtEncoder encoder;
 	private final PropriedadesJwt propriedades;
 	private final Clock relogio;
-
-	public TokenService(JwtEncoder encoder, PropriedadesJwt propriedades, Clock relogio) {
-		this.encoder = encoder;
-		this.propriedades = propriedades;
-		this.relogio = relogio;
-	}
 
 	public TokenEmitido emitir(UsuarioAutenticado usuario) {
 		Instant agora = relogio.instant();

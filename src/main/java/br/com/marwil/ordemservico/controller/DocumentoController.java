@@ -13,16 +13,14 @@ import br.com.marwil.ordemservico.security.UsuarioAutenticado;
 import br.com.marwil.ordemservico.service.DocumentoOrdemServicoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @Tag(name = "Documentos")
+@RequiredArgsConstructor
 public class DocumentoController {
 
 	private final DocumentoOrdemServicoService documentos;
-
-	public DocumentoController(DocumentoOrdemServicoService documentos) {
-		this.documentos = documentos;
-	}
 
 	@GetMapping(value = "/api/v1/ordens-servico/{id}/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
 	@Operation(summary = "PDF A4 da ordem de serviço; a versão do técnico não traz valores")

@@ -10,15 +10,13 @@ import org.springframework.stereotype.Component;
 import br.com.marwil.ordemservico.exception.RecursoNaoEncontradoException;
 import br.com.marwil.ordemservico.repository.OrdemServicoRepository;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class AcessoOrdemServico {
 
 	private final OrdemServicoRepository ordens;
-
-	public AcessoOrdemServico(OrdemServicoRepository ordens) {
-		this.ordens = ordens;
-	}
 
 	public boolean visivel(UsuarioAutenticado usuario, Long ordemServicoId) {
 		return usuario.ehGestor() || ordens.exists(comId(ordemServicoId).and(visivelAoTecnico(usuario.id())));

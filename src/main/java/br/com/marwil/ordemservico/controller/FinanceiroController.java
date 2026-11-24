@@ -16,20 +16,18 @@ import br.com.marwil.ordemservico.service.FinanceiroService;
 import br.com.marwil.ordemservico.util.Paginacao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/financeiro")
 @ApenasGestores
 @Tag(name = "Financeiro")
+@RequiredArgsConstructor
 public class FinanceiroController {
 
 	private static final Sort ORDENACAO = Sort.by(Sort.Order.desc("dataLancamento"), Sort.Order.desc("id"));
 
 	private final FinanceiroService servico;
-
-	public FinanceiroController(FinanceiroService servico) {
-		this.servico = servico;
-	}
 
 	@GetMapping("/resumo")
 	@Operation(summary = "Total recebido no período, saldo pendente, vencido e pendências por cliente")

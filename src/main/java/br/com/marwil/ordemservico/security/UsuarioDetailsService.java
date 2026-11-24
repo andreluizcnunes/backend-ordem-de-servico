@@ -6,15 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.marwil.ordemservico.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioDetailsService implements UserDetailsService {
 
 	private final UsuarioRepository usuarios;
-
-	public UsuarioDetailsService(UsuarioRepository usuarios) {
-		this.usuarios = usuarios;
-	}
 
 	@Override
 	@Transactional(readOnly = true)

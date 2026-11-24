@@ -22,22 +22,16 @@ import br.com.marwil.ordemservico.repository.OrdemServicoTecnicoRepository;
 import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.repository.specification.UsuarioSpecifications;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
 	private final UsuarioRepository usuarios;
 	private final OrdemServicoTecnicoRepository equipes;
 	private final PasswordEncoder codificador;
 	private final UsuarioMapper mapper;
-
-	public UsuarioService(UsuarioRepository usuarios, OrdemServicoTecnicoRepository equipes,
-			PasswordEncoder codificador, UsuarioMapper mapper) {
-		this.usuarios = usuarios;
-		this.equipes = equipes;
-		this.codificador = codificador;
-		this.mapper = mapper;
-	}
 
 	@Transactional
 	public UsuarioResponse cadastrar(UsuarioRequest requisicao) {

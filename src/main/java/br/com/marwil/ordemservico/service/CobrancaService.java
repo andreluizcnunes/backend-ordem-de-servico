@@ -34,8 +34,10 @@ import br.com.marwil.ordemservico.repository.PagamentoRepository;
 import br.com.marwil.ordemservico.repository.UsuarioRepository;
 import br.com.marwil.ordemservico.repository.specification.CobrancaSpecifications;
 import br.com.marwil.ordemservico.security.UsuarioAutenticado;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class CobrancaService {
 
 	private final CobrancaRepository cobrancas;
@@ -46,19 +48,6 @@ public class CobrancaService {
 	private final UsuarioRepository usuarios;
 	private final CobrancaMapper mapper;
 	private final Clock relogio;
-
-	public CobrancaService(CobrancaRepository cobrancas, PagamentoRepository pagamentos,
-			LancamentoCaixaRepository caixa, OrdemServicoRepository ordens, ItemOrdemServicoRepository itens,
-			UsuarioRepository usuarios, CobrancaMapper mapper, Clock relogio) {
-		this.cobrancas = cobrancas;
-		this.pagamentos = pagamentos;
-		this.caixa = caixa;
-		this.ordens = ordens;
-		this.itens = itens;
-		this.usuarios = usuarios;
-		this.mapper = mapper;
-		this.relogio = relogio;
-	}
 
 	@Transactional
 	public CobrancaResponse enviar(UsuarioAutenticado responsavel, Long ordemServicoId,
